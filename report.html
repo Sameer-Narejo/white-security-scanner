@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecuLens Security Assessment Report</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --border: #e2e8f0;
+            --high: #dc2626;
+            --medium: #d97706;
+            --low: #16a34a;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+        }
+        header p {
+            margin: 5px 0;
+            color: #94a3b8;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .metric-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        .metric-card h3 {
+            margin: 0;
+            font-size: 14px;
+            color: #64748b;
+            text-transform: uppercase;
+        }
+        .metric-card .value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: var(--primary);
+        }
+        .finding-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .finding-header {
+            padding: 15px 20px;
+            background: #f1f5f9;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+        .badge.High { background-color: var(--high); }
+        .badge.Medium { background-color: var(--medium); }
+        .badge.Low { background-color: var(--low); }
+        .finding-body {
+            padding: 20px;
+        }
+        .view-section {
+            margin-bottom: 15px;
+        }
+        .view-section h4 {
+            margin: 0 0 5px 0;
+            font-size: 13px;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 0.5px;
+        }
+        .manager-view {
+            background: #eff6ff;
+            border-left: 4px solid var(--accent);
+            padding: 12px 15px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 15px;
+        }
+        .technical-view {
+            background: #f8fafc;
+            border-left: 4px solid #64748b;
+            padding: 12px 15px;
+            border-radius: 0 6px 6px 0;
+        }
+        .code-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            margin-top: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SecuLens Security Dashboard</h1>
+            <p><strong>Target:</strong> https://example.com</p>
+            <p><strong>Profile:</strong> FULL</p>
+            <p><strong>Overall Risk Rating:</strong> <span style="color: #facc15; font-weight: bold;">High</span></p>
+        </header>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>Total Findings</h3>
+                <div class="value">2</div>
+            </div>
+            <div class="metric-card">
+                <h3>Critical / High</h3>
+                <div class="value" style="color: var(--high);">1</div>
+            </div>
+            <div class="metric-card">
+                <h3>Medium</h3>
+                <div class="value" style="color: var(--medium);">1</div>
+            </div>
+            <div class="metric-card">
+                <h3>Low / Info</h3>
+                <div class="value" style="color: var(--low);">0</div>
+            </div>
+        </div>
+
+        <h2>Detailed Security Findings</h2>
+
+        <div class="finding-card">
+            <div class="finding-header">
+                <strong>Missing X-Frame-Options Header</strong>
+                <span class="badge Medium">MEDIUM</span>
+            </div>
+            <div class="finding-body">
+                <div class="manager-view">
+                    <h4>👔 Manager & Executive Summary</h4>
+                    <p><strong>Impact:</strong> Loss of user trust and potential unauthorized actions performed on behalf of authenticated users via UI redressing.</p>
+                    <p style="margin-bottom:0;"><strong>What it means:</strong> The website can be invisibly loaded inside another malicious website, tricking users into clicking unintended buttons.</p>
+                </div>
+                
+                <div class="technical-view">
+                    <h4>💻 Developer & Technical Details</h4>
+                    <p><strong>Technical Reason:</strong> The HTTP response does not include the X-Frame-Options header, leaving it vulnerable to Clickjacking attacks.</p>
+                    <p><strong>Observed Evidence:</strong></p>
+                    <div class="code-box">Checked headers. Response headers received: ['Date', 'Content-Type', 'Transfer-Encoding', 'Connection', 'Server', 'last-modified', 'allow', 'Age', 'cf-cache-status', 'Content-Encoding', 'CF-RAY', 'alt-svc']</div>
+                    <p style="margin-top: 10px;"><strong>Recommended Fix:</strong> Configure your web server to return the 'X-Frame-Options: SAMEORIGIN' header.</p>
+                </div>
+            </div>
+        </div>
+            
+        <div class="finding-card">
+            <div class="finding-header">
+                <strong>Missing Strict-Transport-Security (HSTS) Header</strong>
+                <span class="badge High">HIGH</span>
+            </div>
+            <div class="finding-body">
+                <div class="manager-view">
+                    <h4>👔 Manager & Executive Summary</h4>
+                    <p><strong>Impact:</strong> Data interception, credential theft, and man-in-the-middle attacks on initial page loads.</p>
+                    <p style="margin-bottom:0;"><strong>What it means:</strong> Users could initially connect over an unencrypted connection, making their data vulnerable to interception.</p>
+                </div>
+                
+                <div class="technical-view">
+                    <h4>💻 Developer & Technical Details</h4>
+                    <p><strong>Technical Reason:</strong> The HTTP response is missing the Strict-Transport-Security header, allowing protocol downgrade attacks.</p>
+                    <p><strong>Observed Evidence:</strong></p>
+                    <div class="code-box">Strict-Transport-Security (HSTS) header is absent from the response.</div>
+                    <p style="margin-top: 10px;"><strong>Recommended Fix:</strong> Configure your web server to include 'Strict-Transport-Security: max-age=31536000; includeSubDomains'.</p>
+                </div>
+            </div>
+        </div>
+            
+    </div>
+</body>
+</html>
+    

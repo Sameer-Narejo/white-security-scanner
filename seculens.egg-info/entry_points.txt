@@ -1,0 +1,2 @@
+[console_scripts]
+seculens = app.cli:app

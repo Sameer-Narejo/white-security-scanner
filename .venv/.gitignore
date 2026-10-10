@@ -1,0 +1,15 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+# Python and Virtual Environments
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Local SecuLens reports
+report.html
+report.json
+*_report.html
+*_report.json
+
+# IDE files
+.vscode/ 

@@ -1,0 +1,38 @@
+[
+    {
+        "finding_id": "SEC-HDR-001",
+        "title": "Missing X-Frame-Options Header",
+        "category": "Headers",
+        "severity": "Medium",
+        "confidence": "High",
+        "target": "https://example.com",
+        "evidence": "The 'X-Frame-Options' header was missing from the HTTP response headers.",
+        "technical_explanation": "Without X-Frame-Options, the application can be framed by malicious sites, exposing it to clickjacking.",
+        "plain_explanation": "Your website can be invisibly loaded inside another malicious website, tricking users into clicking unintended buttons.",
+        "remediation": "Configure your web server to return the 'X-Frame-Options: SAMEORIGIN' header."
+    },
+    {
+        "finding_id": "SEC-HDR-002",
+        "title": "Missing Strict-Transport-Security (HSTS) Header",
+        "category": "Headers",
+        "severity": "High",
+        "confidence": "High",
+        "target": "https://example.com",
+        "evidence": "The 'Strict-Transport-Security' header was missing from the HTTP response headers.",
+        "technical_explanation": "HSTS enforces secure HTTPS connections, preventing protocol downgrade attacks and cookie hijacking.",
+        "plain_explanation": "Users could initially connect over an unencrypted connection, making their data vulnerable to interception.",
+        "remediation": "Configure your web server to include 'Strict-Transport-Security: max-age=31536000; includeSubDomains'."
+    },
+    {
+        "finding_id": "SEC-TLS-001",
+        "title": "HTTP Not Redirecting to HTTPS",
+        "category": "Transport Security",
+        "severity": "High",
+        "confidence": "High",
+        "target": "https://example.com",
+        "evidence": "Accessing 'http://example.com' did not enforce a redirect to HTTPS (final destination: http://example.com/).",
+        "technical_explanation": "The web server permits cleartext HTTP communication without enforcing a secure HTTPS redirect.",
+        "plain_explanation": "Users who type your web address without 'https://' can be vulnerable to interception or traffic modification.",
+        "remediation": "Configure your web server to permanently redirect all incoming HTTP traffic to HTTPS (using a 301 redirect)."
+    }
+]
